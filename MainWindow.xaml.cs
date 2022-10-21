@@ -44,5 +44,11 @@ namespace myTunes
             //Default selects the list item at 0 ("All Music")
             playlistListBox.SelectedIndex = 0;
         }
+
+        //source (Display context menu on right click): https://stackoverflow.com/questions/43547647/how-to-make-right-click-button-context-menu-in-wpf
+        private void playlistListBox_MouseRightButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ContextMenu = (ContextMenu)Resources["listboxItemContextMenu"];
+        }
     }
 }

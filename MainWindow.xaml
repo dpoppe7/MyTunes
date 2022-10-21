@@ -6,12 +6,34 @@
         xmlns:local="clr-namespace:myTunes"
         mc:Ignorable="d"
         Title="myTunes" Height="477" Width="894">
+    <Window.Resources>
+        <!--Context menu for playlists ListBox items that pops up when right click-->
+        <ContextMenu x:Key="listboxItemContextMenu">
+            <MenuItem Header="Rename"/>
+            <MenuItem Header="Remove"/>
+        </ContextMenu>
+
+        <ContextMenu x:Key="listboxItemContextMenu_Disable" IsEnabled="False">
+            <MenuItem Header="Rename"/>
+            <MenuItem Header="Remove"/>
+        </ContextMenu>
+    </Window.Resources>
 
     <Grid>
         <DockPanel Width="auto" Height="auto">
-            <ToolBar DockPanel.Dock="Top" Height="35"/>
+            <ToolBar DockPanel.Dock="Top" Height="35">
+                <Button ToolTip="Open">
+                    <Image Source="/btn_folder.png"/>
+                </Button>
+                <Button ToolTip="New Playlist">
+                    <Image Source="/btn_addSong.png"/>
+                </Button>
+                <Button ToolTip="About">
+                    <Image Source="/btn_info.png"/>
+                </Button>
+            </ToolBar>
             
-            <ListBox DockPanel.Dock="Left" x:Name="playlistListBox" Width="150" Margin="10">
+            <ListBox DockPanel.Dock="Left" x:Name="playlistListBox" Width="150" Margin="10" MouseRightButtonUp="playlistListBox_MouseRightButtonUp">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">

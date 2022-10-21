@@ -8,7 +8,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="btn_addSong.png" />
+    <None Remove="btn_folder.png" />
+    <None Remove="btn_info.png" />
+    <None Remove="song_bird_21844.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="TagLibSharp" Version="2.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="btn_addSong.png" />
+    <Resource Include="btn_folder.png" />
+    <Resource Include="btn_info.png" />
+    <Resource Include="song_bird_21844.png" />
   </ItemGroup>
 
   <ItemGroup>
