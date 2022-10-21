@@ -1,0 +1,65 @@
+<?xml version="1.0" standalone="yes"?>
+<music>
+  <song>
+    <id>1</id>
+    <title>Space</title>
+    <artist>Various</artist>
+	<album>X</album>/>
+    <filename>C:\Users\dpoppe\Music\space.mp3</filename>
+    <length>02:28</length>
+    <genre>Soundtrack</genre>
+  </song>
+  <song>
+    <id>2</id>
+    <title>Forest Lullaby</title>
+    <artist>Various</artist>
+	<album>Flower</album>/>
+    <filename>C:\Users\dpoppe\Music\forest-lullaby.mp3</filename>
+	<length>2:18</length>
+    <genre />
+  </song>
+  <song>
+    <id>3</id>
+    <title>inspiring Cinematic</title>
+    <artist>Various</artist>
+    <album>?</album>
+    <filename>C:\Users\dpoppe\Music\inspiring-cinematic.mp3</filename>
+	<length>3:09</length>
+    <genre>Soundtrack</genre>
+  </song>
+  <song>
+    <id>4</id>
+    <title>Calm background</title>
+    <artist></artist>
+	<album>Album V</album>
+    <filename>C:\Users\dpoppe\Music\calm-background.mp3</filename>
+    <length>02:40</length>
+    <genre>Soundtrack</genre>
+  </song> 
+  <playlist>
+    <name>Cool stuff</name>
+  </playlist>
+  <playlist>
+    <name>Quiet music</name>
+  </playlist>
+  <playlist_song>
+    <song_id>1</song_id>
+    <playlist_name>Cool stuff</playlist_name>
+    <position>1</position>
+  </playlist_song>
+  <playlist_song>
+    <song_id>3</song_id>
+    <playlist_name>Cool stuff</playlist_name>
+    <position>2</position>
+  </playlist_song>
+  <playlist_song>
+    <song_id>2</song_id>
+    <playlist_name>Cool stuff</playlist_name>
+    <position>3</position>
+  </playlist_song>
+  <playlist_song>
+    <song_id>2</song_id>
+    <playlist_name>Quiet music</playlist_name>
+    <position>1</position>
+  </playlist_song>
+</music>
