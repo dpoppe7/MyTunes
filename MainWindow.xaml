@@ -5,6 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:myTunes"
         mc:Ignorable="d"
-        Title="myTunes" Height="450" Width="902">
-   
+        Title="myTunes" Height="477" Width="894">
+
+    <Grid>
+        <DockPanel Width="auto" Height="auto">
+            <ToolBar DockPanel.Dock="Top" Height="35"/>
+            <ListBox DockPanel.Dock="Left"  Width="150" Margin="10"/>
+            <DockPanel Width="auto" Height="auto">
+                <DataGrid DockPanel.Dock="Top" Margin="10"/>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
 </Window>
