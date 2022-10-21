@@ -10,7 +10,17 @@
     <Grid>
         <DockPanel Width="auto" Height="auto">
             <ToolBar DockPanel.Dock="Top" Height="35"/>
-            <ListBox DockPanel.Dock="Left"  Width="150" Margin="10"/>
+            
+            <ListBox DockPanel.Dock="Left" x:Name="playlistListBox" Width="150" Margin="10">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            
             <DockPanel Width="auto" Height="auto">
                 <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Height="40">
                     <!--Add buttons -->

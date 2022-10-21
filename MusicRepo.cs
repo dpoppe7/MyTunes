@@ -20,7 +20,6 @@ namespace myTunes
         public const string XML_MUSICFILE = "music.xml";
         public const string XSD_MUSICFILE = "music.xsd";
 
-
         public string[] Playlists
         {
             get
