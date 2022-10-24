@@ -28,7 +28,12 @@ namespace myTunes
                 Application.Current.Shutdown();
             }
 
-            PopulateListBox();          
+            PopulateListBox();
+
+            if(musicRepo != null)
+            {
+                musicDataGrid.ItemsSource = musicRepo.Songs.DefaultView;
+            }
         }
 
         private void PopulateListBox()

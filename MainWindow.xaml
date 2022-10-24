@@ -48,7 +48,7 @@
                     <!--Add buttons -->
                 </StackPanel>
                             
-                <DataGrid DockPanel.Dock="Top" Margin="10"/>
+                <DataGrid x:Name="musicDataGrid" DockPanel.Dock="Top" Margin="10"/>
             </DockPanel>
         </DockPanel>
     </Grid>
