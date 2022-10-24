@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyTunes;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -49,6 +50,12 @@ namespace myTunes
         private void playlistListBox_MouseRightButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ContextMenu = (ContextMenu)Resources["listboxItemContextMenu"];
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            About about = new About();
+            about.ShowDialog();
         }
     }
 }

@@ -28,7 +28,7 @@
                 <Button ToolTip="New Playlist">
                     <Image Source="/btn_addSong.png"/>
                 </Button>
-                <Button ToolTip="About">
+                <Button ToolTip="About" Click="Button_Click">
                     <Image Source="/btn_info.png"/>
                 </Button>
             </ToolBar>
