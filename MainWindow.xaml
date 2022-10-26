@@ -7,16 +7,7 @@
         mc:Ignorable="d"
         Title="myTunes" Height="477" Width="894">
     <Window.Resources>
-        <!--Context menu for playlists ListBox items that pops up when right click-->
-        <ContextMenu x:Key="listboxItemContextMenu">
-            <MenuItem Header="Rename"/>
-            <MenuItem Header="Remove"/>
-        </ContextMenu>
-
-        <ContextMenu x:Key="listboxItemContextMenu_Disable" IsEnabled="False">
-            <MenuItem Header="Rename"/>
-            <MenuItem Header="Remove"/>
-        </ContextMenu>
+        
     </Window.Resources>
 
     <Grid>
@@ -41,6 +32,13 @@
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
+                <ListBox.ContextMenu>
+                    <ContextMenu DataContext="{Binding Path=PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+                        <MenuItem Header="Rename"/>
+                        <Separator/>
+                        <MenuItem Header="Remove"/>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
             </ListBox>
             
             <DockPanel Width="auto" Height="auto">
