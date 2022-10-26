@@ -26,7 +26,7 @@ namespace MyTunes
 
         private void OkButton_NewPlaylist_Click(object sender, RoutedEventArgs e)
         {
-
+            DialogResult = true;
         }
 
         private void CancelButton_NewPlaylist_Click(object sender, RoutedEventArgs e)

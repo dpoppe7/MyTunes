@@ -13,6 +13,7 @@ namespace myTunes
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<string> playlistNames = new();
         private readonly MusicRepo musicRepo;
         public MainWindow()
         {
@@ -38,8 +39,7 @@ namespace myTunes
 
         private void PopulateListBox()
         {
-            //Binding List of elements in Playlist[] to playlistListbox
-            List<string> playlistNames = new List<string>();
+            //Binding List of elements in Playlist[] to playlistListboxplaylistNames = new List<string>();
             playlistNames.Add("All Music");
             foreach (var name in musicRepo.Playlists)
             {
@@ -67,6 +67,27 @@ namespace myTunes
         {
             NewPlaylist newPlaylist = new NewPlaylist();
             newPlaylist.ShowDialog();
+
+            if (DialogResult == true)
+            {
+                if (!String.IsNullOrEmpty(newPlaylist.newPlaylistName_Textbox.Text))
+                {
+                    //Tries adding the playlist and returns true if successful, false if not added (playllist already existed)
+                    if (musicRepo.AddPlaylist(newPlaylist.newPlaylistName_Textbox.Text))
+                    {
+                        playlistNames.Add((string)newPlaylist.newPlaylistName_Textbox.Text);
+                    }
+                    else
+                    {
+                        MessageBox.Show("There is already a playlist with that name.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    //message box "Please enter a playlist name"
+                    MessageBox.Show("Please enter a playlist name", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

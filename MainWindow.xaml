@@ -5,13 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:myTunes"
         mc:Ignorable="d"
-        Title="myTunes" Height="477" Width="894" WindowStartupLocation="CenterScreen">
+        Title="myTunes" Height="477" Width="894" WindowStartupLocation="CenterScreen" Icon="/song_bird_21844.png">
     <Window.Resources>
-        
+
     </Window.Resources>
 
     <Grid>
-        <DockPanel Width="auto" Height="auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="395*"/>
+            <ColumnDefinition Width="52*"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel Width="auto" Height="auto" Grid.ColumnSpan="2">
             <ToolBar DockPanel.Dock="Top" Height="35">
                 <Button ToolTip="Open">
                     <Image Source="/btn_folder.png"/>
@@ -23,7 +27,7 @@
                     <Image Source="/btn_info.png"/>
                 </Button>
             </ToolBar>
-            
+
             <ListBox DockPanel.Dock="Left" x:Name="playlistListBox" Width="150" Margin="10" MouseRightButtonUp="playlistListBox_MouseRightButtonUp">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -40,12 +44,12 @@
                     </ContextMenu>
                 </ListBox.ContextMenu>
             </ListBox>
-            
+
             <DockPanel Width="auto" Height="auto">
                 <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Height="40">
                     <!--Add buttons -->
                 </StackPanel>
-                            
+
                 <DataGrid x:Name="musicDataGrid" DockPanel.Dock="Top" Margin="10"/>
             </DockPanel>
         </DockPanel>
