@@ -66,16 +66,19 @@ namespace myTunes
         private void NewPlaylistButton_Click(object sender, RoutedEventArgs e)
         {
             NewPlaylist newPlaylist = new NewPlaylist();
-            newPlaylist.ShowDialog();
+            bool? result = newPlaylist.ShowDialog();
 
-            if (DialogResult == true)
+            if (result == true)
             {
+                //Checks that input entered onto newPlaylist textbox is not empty/null.
                 if (!String.IsNullOrEmpty(newPlaylist.newPlaylistName_Textbox.Text))
                 {
-                    //Tries adding the playlist and returns true if successful, false if not added (playllist already existed)
+                    //Tries adding the playlist name; returns true if successful, false if not added (playllist already existed)
                     if (musicRepo.AddPlaylist(newPlaylist.newPlaylistName_Textbox.Text))
                     {
-                        playlistNames.Add((string)newPlaylist.newPlaylistName_Textbox.Text);
+                        playlistNames.Add(newPlaylist.newPlaylistName_Textbox.Text);
+
+                        playlistListBox.Items.Refresh();
                     }
                     else
                     {
@@ -84,7 +87,6 @@ namespace myTunes
                 }
                 else
                 {
-                    //message box "Please enter a playlist name"
                     MessageBox.Show("Please enter a playlist name", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
