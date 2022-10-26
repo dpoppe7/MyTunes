@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:myTunes"
         mc:Ignorable="d"
-        Title="myTunes" Height="477" Width="894">
+        Title="myTunes" Height="477" Width="894" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         
     </Window.Resources>
@@ -16,10 +16,10 @@
                 <Button ToolTip="Open">
                     <Image Source="/btn_folder.png"/>
                 </Button>
-                <Button ToolTip="New Playlist">
+                <Button ToolTip="New Playlist" Click="NewPlaylistButton_Click">
                     <Image Source="/btn_addSong.png"/>
                 </Button>
-                <Button ToolTip="About" Click="Button_Click">
+                <Button ToolTip="About" Click="AboutButton_Click">
                     <Image Source="/btn_info.png"/>
                 </Button>
             </ToolBar>

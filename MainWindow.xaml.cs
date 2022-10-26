@@ -57,10 +57,16 @@ namespace myTunes
             ContextMenu = (ContextMenu)Resources["listboxItemContextMenu"];
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AboutButton_Click(object sender, RoutedEventArgs e)
         {
             About about = new About();
             about.ShowDialog();
+        }
+
+        private void NewPlaylistButton_Click(object sender, RoutedEventArgs e)
+        {
+            NewPlaylist newPlaylist = new NewPlaylist();
+            newPlaylist.ShowDialog();
         }
     }
 }
