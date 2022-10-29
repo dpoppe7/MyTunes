@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Data;
+using System.Windows.Input;
 
 namespace myTunes
 {
@@ -16,6 +17,7 @@ namespace myTunes
     {
         private List<string> playlistNames = new();
         private List<Song> songList = new();
+        private Point startPoint;
 
         private readonly MusicRepo musicRepo;
         public MainWindow()
@@ -45,16 +47,15 @@ namespace myTunes
                 foreach (DataRowView dataRow in dataView)
                 {
                     int id = (int)dataRow.Row["id"];
-
                     Song songInfo = musicRepo.GetSong(id);
-                    songList.Add(songInfo); 
+                    songList.Add(songInfo);
                 }
             }
         }
 
         private void PopulatePlaylists_Listbox()
         {
-            //Binding List of elements in Playlist[] to playlistListboxplaylistNames = new List<string>();
+            //Binding List of elements in Playlist[] to playlistListNames
             playlistNames.Add("All Music");
             foreach (var name in musicRepo.Playlists)
             {
@@ -103,6 +104,36 @@ namespace myTunes
                 else
                 {
                     MessageBox.Show("Please enter a playlist name", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void musicDataGrid_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            //stores the mouse position
+            startPoint = e.GetPosition(null);
+        }
+
+        private void musicDataGrid_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            // Get the current mouse position
+            Point mousePos = e.GetPosition(null);
+            Vector diff = startPoint - mousePos;
+
+            // Start the drag-drop if mouse has moved far enough
+            if (e.LeftButton == MouseButtonState.Pressed &&
+                (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
+                Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
+            {
+                //Determines which ros is selected
+                DataRowView rowView = musicDataGrid.SelectedItem as DataRowView;
+                if (rowView != null)
+                {
+                    // Extract the song ID from the selected song
+                    int songId = Convert.ToInt32(rowView.Row.ItemArray[0]);
+
+                    // Initiate dragging the text from the textbox
+                    DragDrop.DoDragDrop(musicDataGrid, songId, DragDropEffects.Copy);
                 }
             }
         }

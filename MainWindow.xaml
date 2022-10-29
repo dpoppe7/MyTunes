@@ -32,7 +32,7 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="{Binding}"/>
+                            <Label Content="{Binding}" AllowDrop="True"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -50,7 +50,7 @@
                     <!--Add buttons -->
                 </StackPanel>
 
-                <DataGrid x:Name="musicDataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" DockPanel.Dock="Top" CanUserAddRows="False" Margin="10" ColumnWidth="*">
+                <DataGrid x:Name="musicDataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" DockPanel.Dock="Top" CanUserAddRows="False" Margin="10" ColumnWidth="*" PreviewMouseLeftButtonDown="musicDataGrid_PreviewMouseLeftButtonDown" MouseMove="musicDataGrid_MouseMove">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding id}" Visibility="Hidden"/>
                         <DataGridTextColumn Binding="{Binding title}" Header="Title"/>
