@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Data;
 
 namespace myTunes
 {
@@ -14,6 +15,8 @@ namespace myTunes
     public partial class MainWindow : Window
     {
         private List<string> playlistNames = new();
+        private List<Song> songList = new();
+
         private readonly MusicRepo musicRepo;
         public MainWindow()
         {
@@ -29,15 +32,27 @@ namespace myTunes
                 Application.Current.Shutdown();
             }
 
-            PopulateListBox();
+            PopulatePlaylists_Listbox();
+            PopulateSongs_Datagrid();        }
 
-            if(musicRepo != null)
+        private void PopulateSongs_Datagrid()
+        {
+            if (musicRepo != null)
             {
-                musicDataGrid.ItemsSource = musicRepo.Songs.DefaultView;
+                DataView dataView = musicRepo.Songs.DefaultView;
+                musicDataGrid.ItemsSource = dataView;
+
+                foreach (DataRowView dataRow in dataView)
+                {
+                    int id = (int)dataRow.Row["id"];
+
+                    Song songInfo = musicRepo.GetSong(id);
+                    songList.Add(songInfo); 
+                }
             }
         }
 
-        private void PopulateListBox()
+        private void PopulatePlaylists_Listbox()
         {
             //Binding List of elements in Playlist[] to playlistListboxplaylistNames = new List<string>();
             playlistNames.Add("All Music");

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:myTunes"
         mc:Ignorable="d"
-        Title="myTunes" Height="477" Width="894" WindowStartupLocation="CenterScreen" Icon="/song_bird_21844.png">
+        Title="myTunes" Height="414" Width="749" WindowStartupLocation="CenterScreen" Icon="/song_bird_21844.png">
     <Window.Resources>
 
     </Window.Resources>
@@ -50,7 +50,15 @@
                     <!--Add buttons -->
                 </StackPanel>
 
-                <DataGrid x:Name="musicDataGrid" DockPanel.Dock="Top" Margin="10"/>
+                <DataGrid x:Name="musicDataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" DockPanel.Dock="Top" CanUserAddRows="False" Margin="10" ColumnWidth="*">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding id}" Visibility="Hidden"/>
+                        <DataGridTextColumn Binding="{Binding title}" Header="Title"/>
+                        <DataGridTextColumn Binding="{Binding artist}" Header="Artist"/>
+                        <DataGridTextColumn Binding="{Binding album}" Header="Album"/>
+                        <DataGridTextColumn Binding="{Binding genre}" Header="Genre"/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </DockPanel>
         </DockPanel>
     </Grid>
