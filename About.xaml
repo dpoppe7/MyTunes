@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyTunes"
         mc:Ignorable="d"
-        Title="About" Height="248" Width="396" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="About" Height="248" Width="396" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/song_bird_21844.png">
     <Grid>
         <Image HorizontalAlignment="Left" Height="107" Margin="71,0,0,113" VerticalAlignment="Bottom" Width="162" Source="/song_bird_21844.png"/>
         <Label Content="MyTunes" HorizontalAlignment="Left" Margin="178,0,0,128" VerticalAlignment="Bottom" FontSize="30" Foreground="#FFF54114" FontFamily="Yu Gothic UI Semibold" FontWeight="Bold"/>
