@@ -96,11 +96,23 @@ namespace myTunes
         private void displayPlaylistSongs(DataView dataView)
         {
             musicDataGrid.ItemsSource = dataView;
+            bool isSongsDefaultView = false;
+            if (dataView == musicRepo.Songs.DefaultView) isSongsDefaultView = true;
 
             foreach (DataRowView dataRow in dataView)
             {
-                int id = Convert.ToInt32((string)dataRow.Row["id"]);
-                Song songInfo = musicRepo.GetSong(id);
+                int songId;
+                if (isSongsDefaultView)
+                {
+                    //Casting string to Int32 when dataview = musicRepo.Songs.DefaultView
+                    songId = (int)dataRow.Row["id"];
+                }
+                else {
+                    //Casting string to Int32 when dataview = musicRepo.SongsForPlaylist(selectedPlaylist.ToString()).DefaultView
+                    songId = Convert.ToInt32((string)dataRow.Row["id"]);
+                }
+
+                Song songInfo = musicRepo.GetSong(songId);
                 songList.Add(songInfo);
             }
         }
