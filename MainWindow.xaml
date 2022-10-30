@@ -7,7 +7,21 @@
         mc:Ignorable="d"
         Title="myTunes" Height="414" Width="749" WindowStartupLocation="CenterScreen" Icon="/song_bird_21844.png">
     <Window.Resources>
-        
+        <ControlTemplate x:Key="MyButtonTemplate" TargetType="Button">
+            <Border Name="Border" BorderThickness="2" CornerRadius="10" BorderBrush="Black">
+                <ContentPresenter Name="InnerText" HorizontalAlignment="Center"
+                VerticalAlignment="Center" TextBlock.Foreground="Black" />
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Border" Property="Background" Value="LightBlue" />
+                    <Setter TargetName="InnerText" Property="TextBlock.FontWeight" Value="Bold" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="Border" Property="Background" Value="SkyBlue" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </Window.Resources>
 
     <Grid>
@@ -48,8 +62,8 @@
             <DockPanel Width="auto" Height="auto">
                 <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Height="40">
                     <!--Add buttons -->
-                    <Button x:Name="playButton" Content="Play" Margin="10,0,5,0" Height="25" Width="75" Click="playButton_Click"/>
-                    <Button x:Name="stopButton" Content="Stop" Height="25" Width="75" Click="stopButton_Click"/>
+                    <Button x:Name="playButton" Content="Play" Margin="10,0,5,0" Height="25" Width="75" Click="playButton_Click" Template="{StaticResource MyButtonTemplate}"/>
+                    <Button x:Name="stopButton" Content="Stop" Height="25" Width="75" Click="stopButton_Click" Template="{StaticResource MyButtonTemplate}"/>
                 </StackPanel>
 
                 <DataGrid x:Name="musicDataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" 
