@@ -105,7 +105,7 @@ namespace myTunes
                 int songId;
                 if (isDefaultView)
                 {
-                    //Casting string to Int32 when dataview = musicRepo.Songs.DefaultView
+                    //Casting string to int when dataview = musicRepo.Songs.DefaultView
                     songId = (int)dataRow.Row["id"];
                 }
                 else {
@@ -177,7 +177,7 @@ namespace myTunes
                 Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
             {
                 //Determines which row is selected
-                DataRowView rowView = musicDataGrid.SelectedItem as DataRowView;
+                DataRowView? rowView = musicDataGrid.SelectedItem as DataRowView;
                 if (rowView != null)
                 {
                     // Extract the song ID from the selected song
@@ -191,25 +191,20 @@ namespace myTunes
 
         private void playlist_Drop(object sender, DragEventArgs e)
         {
-            // If the DataObject contains string data, extract it
-            if (e.Data.GetDataPresent(DataFormats.StringFormat))
-            {
-                /*int songId;
-                string playlist;
-                //string dataString = (string)e.Data.GetData(DataFormats.StringFormat);
-                Label listItemText = (Label)sender;
-                
-                DataRowView rowView = musicDataGrid.SelectedItem as DataRowView;
-                if (rowView != null)
-                {
-                    songId = Convert.ToInt32(rowView.Row.ItemArray[0]);
-                    playlist = listItemText.Content.ToString();
+            Label listItemText = (Label)sender;
+            string? playlist = listItemText.Content.ToString();
 
-                    if (playlist != null)
-                    {
-                        musicRepo.AddSongToPlaylist(songId, playlist);
-                    }
-                }*/
+            DataRowView? rowView = musicDataGrid.SelectedItem as DataRowView;
+            if (rowView != null)
+            {
+                // Extract the song ID from the selected song
+                int songId = Convert.ToInt32(rowView.Row.ItemArray[0]);
+
+                Song song = musicRepo.GetSong(songId);
+                if (playlist != null)
+                {
+                    musicRepo.AddSongToPlaylist(song.Id, playlist);
+                }
             }
         }
 
