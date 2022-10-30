@@ -66,7 +66,7 @@
                     </DataGrid.Columns>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Play"/>
+                            <MenuItem x:Name="PlayMenuItem" Header="Play" Click="PlayMenuItem_Click"/>
                             <Separator/>
                             <MenuItem x:Name="RemoveMenuItem" Header="Remove" Click="RemoveMenuItem_Click"/>
                         </ContextMenu>

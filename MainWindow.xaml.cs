@@ -178,6 +178,30 @@ namespace myTunes
             }
         }
 
+        private void addSongButton_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new Microsoft.Win32.OpenFileDialog
+            {
+                FileName = "",
+                DefaultExt = "*.wma;*.wav;*mp3;*.m4a",
+                Filter = "Media files|*.mp3;*.m4a;*.wma;*.wav|MP3 (*.mp3)|*.mp3|M4A (*.m4a)|*.m4a|Windows Media Audio (*.wma)|*.wma|Wave files (*.wav)|*.wav|All files|*.*"
+            };
+
+            bool? result = openFileDialog.ShowDialog();
+            if (result == true)
+            {
+                // Call the MusicRepo method AddSong() to add the song to the DataSet.
+                musicRepo.AddSong(openFileDialog.FileName);
+
+                // Call the MusicRepo method Save() to save the DataSet to the music.xml file.
+                musicRepo.Save();
+
+                //TEMPORAL
+                mediaPlayer.Open(new Uri(openFileDialog.FileName));
+                mediaPlayer.Play();
+            }
+        }
+
         private void musicDataGrid_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             //stores the mouse position
@@ -264,30 +288,6 @@ namespace myTunes
             mediaPlayer.Stop();
         }
 
-        private void addSongButton_Click(object sender, RoutedEventArgs e)
-        {
-            var openFileDialog = new Microsoft.Win32.OpenFileDialog
-            {
-                FileName = "",
-                DefaultExt = "*.wma;*.wav;*mp3;*.m4a",
-                Filter = "Media files|*.mp3;*.m4a;*.wma;*.wav|MP3 (*.mp3)|*.mp3|M4A (*.m4a)|*.m4a|Windows Media Audio (*.wma)|*.wma|Wave files (*.wav)|*.wav|All files|*.*"
-            };
-
-            bool? result = openFileDialog.ShowDialog();
-            if (result == true)
-            {
-                // Call the MusicRepo method AddSong() to add the song to the DataSet.
-                musicRepo.AddSong(openFileDialog.FileName);
-
-                // Call the MusicRepo method Save() to save the DataSet to the music.xml file.
-                musicRepo.Save();
-
-                //TEMPORAL
-                mediaPlayer.Open(new Uri(openFileDialog.FileName));
-                mediaPlayer.Play();
-            }
-        }
-
         private void RemoveMenuItem_Click(object sender, RoutedEventArgs e)
         {
             DataRowView? rowView = musicDataGrid.SelectedItem as DataRowView;
@@ -312,6 +312,11 @@ namespace myTunes
                     musicRepo.Save();
                 }
             }
+        }
+
+        private void PlayMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            playButton_Click(sender, e);
         }
     }
 }
