@@ -76,33 +76,31 @@ namespace myTunes
             //When list item is clicked once, display songs inside that playlist
             if (playlistListBox.SelectedItems.Count > 0)
             {
-                string selectedPlaylist = (string)playlistListBox.SelectedItems[0];
+                string? selectedPlaylist = playlistListBox.SelectedItems[0] as string;
                 if (selectedPlaylist != null)
                 {
                     if (selectedPlaylist.ToString() != "All Music")
                     {
                         DataView songsTable = musicRepo.SongsForPlaylist(selectedPlaylist.ToString()).DefaultView;
-                        displayPlaylistSongs(songsTable);
+                        displayPlaylistSongs(songsTable, false);
                     }
                     else
                     {
                         DataView songsTable = musicRepo.Songs.DefaultView;
-                        displayPlaylistSongs(songsTable);
+                        displayPlaylistSongs(songsTable, true);
                     }
                 }
             }
         }
 
-        private void displayPlaylistSongs(DataView dataView)
+        private void displayPlaylistSongs(DataView dataView, bool isDefaultView)
         {
             musicDataGrid.ItemsSource = dataView;
-            bool isSongsDefaultView = false;
-            if (dataView == musicRepo.Songs.DefaultView) isSongsDefaultView = true;
 
             foreach (DataRowView dataRow in dataView)
             {
                 int songId;
-                if (isSongsDefaultView)
+                if (isDefaultView)
                 {
                     //Casting string to Int32 when dataview = musicRepo.Songs.DefaultView
                     songId = (int)dataRow.Row["id"];
