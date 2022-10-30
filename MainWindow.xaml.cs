@@ -248,6 +248,24 @@ namespace myTunes
             mediaPlayer.Stop();
         }
 
+        private void addSongButton_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new Microsoft.Win32.OpenFileDialog
+            {
+                FileName = "",
+                DefaultExt = "*.wma;*.wav;*mp3;*.m4a",
+                Filter = "Media files|*.mp3;*.m4a;*.wma;*.wav|MP3 (*.mp3)|*.mp3|M4A (*.m4a)|*.m4a|Windows Media Audio (*.wma)|*.wma|Wave files (*.wav)|*.wav|All files|*.*"
+            };
 
+            bool? result = openFileDialog.ShowDialog();
+            if (result == true)
+            {
+                // Call the MusicRepo method AddSong() to add the song to the DataSet.
+                musicRepo.AddSong(openFileDialog.FileName);
+
+                // Call the MusicRepo method Save() to save the DataSet to the music.xml file.
+                musicRepo.Save();
+            }
+        }
     }
 }

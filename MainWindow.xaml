@@ -17,7 +17,7 @@
         </Grid.ColumnDefinitions>
         <DockPanel Width="auto" Height="auto" Grid.ColumnSpan="2">
             <ToolBar DockPanel.Dock="Top" Height="35">
-                <Button ToolTip="Open">
+                <Button x:Name="addSongButton" ToolTip="Open" Click="addSongButton_Click">
                     <Image Source="/btn_folder.png"/>
                 </Button>
                 <Button ToolTip="New Playlist" Click="NewPlaylistButton_Click">
@@ -53,7 +53,8 @@
                 </StackPanel>
 
                 <DataGrid x:Name="musicDataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" 
-                          DockPanel.Dock="Top" Margin="10" ColumnWidth="*" PreviewMouseLeftButtonDown="musicDataGrid_PreviewMouseLeftButtonDown" 
+                          DockPanel.Dock="Top" Margin="10" ColumnWidth="*" 
+                          PreviewMouseLeftButtonDown="musicDataGrid_PreviewMouseLeftButtonDown" 
                           MouseMove="musicDataGrid_MouseMove" SelectionChanged="musicDataGrid_SelectionChanged"
                           CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single">
                     <DataGrid.Columns>
