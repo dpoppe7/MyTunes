@@ -281,6 +281,10 @@ namespace myTunes
 
                 // Call the MusicRepo method Save() to save the DataSet to the music.xml file.
                 musicRepo.Save();
+
+                //TEMPORAL
+                mediaPlayer.Open(new Uri(openFileDialog.FileName));
+                mediaPlayer.Play();
             }
         }
 
