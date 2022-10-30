@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="myTunes" Height="414" Width="749" WindowStartupLocation="CenterScreen" Icon="/song_bird_21844.png">
     <Window.Resources>
-
+        
     </Window.Resources>
 
     <Grid>
@@ -64,6 +64,13 @@
                         <DataGridTextColumn Binding="{Binding album}" Header="Album"/>
                         <DataGridTextColumn Binding="{Binding genre}" Header="Genre"/>
                     </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Play"/>
+                            <Separator/>
+                            <MenuItem x:Name="RemoveMenuItem" Header="Remove"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
                 </DataGrid>
             </DockPanel>
         </DockPanel>
