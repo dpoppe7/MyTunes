@@ -223,6 +223,7 @@ namespace myTunes
                 if (playlist != null)
                 {
                     musicRepo.AddSongToPlaylist(song.Id, playlist);
+                    musicRepo.Save();
                 }
             }
         }
