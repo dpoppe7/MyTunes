@@ -309,8 +309,8 @@ namespace myTunes
                 {
                     //No Confirmation Box needed when trying to remove a song from any playlist
                     rowView.Delete();
-                    musicRepo.Save();
                 }
+                musicRepo.Save();
             }
         }
 
