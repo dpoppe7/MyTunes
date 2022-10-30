@@ -66,6 +66,43 @@ namespace myTunes
 
             //Default selects the list item at 0 ("All Music")
             playlistListBox.SelectedIndex = 0;
+
+            //attaching an Event Handler on SelectionChanged
+            playlistListBox.SelectionChanged += playlistSelected_ItemActivate;
+        }
+
+        private void playlistSelected_ItemActivate(object sender, EventArgs e)
+        {
+            //When list item is clicked once, display songs inside that playlist
+            if (playlistListBox.SelectedItems.Count > 0)
+            {
+                string selectedPlaylist = (string)playlistListBox.SelectedItems[0];
+                if (selectedPlaylist != null)
+                {
+                    if (selectedPlaylist.ToString() != "All Music")
+                    {
+                        DataView songsTable = musicRepo.SongsForPlaylist(selectedPlaylist.ToString()).DefaultView;
+                        displayPlaylistSongs(songsTable);
+                    }
+                    else
+                    {
+                        DataView songsTable = musicRepo.Songs.DefaultView;
+                        displayPlaylistSongs(songsTable);
+                    }
+                }
+            }
+        }
+
+        private void displayPlaylistSongs(DataView dataView)
+        {
+            musicDataGrid.ItemsSource = dataView;
+
+            foreach (DataRowView dataRow in dataView)
+            {
+                int id = Convert.ToInt32((string)dataRow.Row["id"]);
+                Song songInfo = musicRepo.GetSong(id);
+                songList.Add(songInfo);
+            }
         }
 
         //source (Display context menu on right click): https://stackoverflow.com/questions/43547647/how-to-make-right-click-button-context-menu-in-wpf
@@ -126,7 +163,7 @@ namespace myTunes
                 (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
                 Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
             {
-                //Determines which ros is selected
+                //Determines which row is selected
                 DataRowView rowView = musicDataGrid.SelectedItem as DataRowView;
                 if (rowView != null)
                 {
@@ -144,7 +181,22 @@ namespace myTunes
             // If the DataObject contains string data, extract it
             if (e.Data.GetDataPresent(DataFormats.StringFormat))
             {
-                string dataString = (string)e.Data.GetData(DataFormats.StringFormat);
+                /*int songId;
+                string playlist;
+                //string dataString = (string)e.Data.GetData(DataFormats.StringFormat);
+                Label listItemText = (Label)sender;
+                
+                DataRowView rowView = musicDataGrid.SelectedItem as DataRowView;
+                if (rowView != null)
+                {
+                    songId = Convert.ToInt32(rowView.Row.ItemArray[0]);
+                    playlist = listItemText.Content.ToString();
+
+                    if (playlist != null)
+                    {
+                        musicRepo.AddSongToPlaylist(songId, playlist);
+                    }
+                }*/
             }
         }
 
@@ -153,7 +205,6 @@ namespace myTunes
             // By default, don't allow dropping
             e.Effects = DragDropEffects.None;
 
-            // If the DataObject contains string data, extract it
             if (e.Data != null)
             {
                 //If the label content of the listbox item is 'All Music' disable drop
