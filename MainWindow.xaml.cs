@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Data;
 using System.Windows.Input;
+using System.Windows.Shapes;
 
 namespace myTunes
 {
@@ -134,6 +135,33 @@ namespace myTunes
 
                     // Initiate dragging the text from the textbox
                     DragDrop.DoDragDrop(musicDataGrid, songId, DragDropEffects.Copy);
+                }
+            }
+        }
+
+        private void playlist_Drop(object sender, DragEventArgs e)
+        {
+            // If the DataObject contains string data, extract it
+            if (e.Data.GetDataPresent(DataFormats.StringFormat))
+            {
+                string dataString = (string)e.Data.GetData(DataFormats.StringFormat);
+            }
+        }
+
+        private void playlist_DragOver(object sender, DragEventArgs e)
+        {
+            // By default, don't allow dropping
+            e.Effects = DragDropEffects.None;
+
+            // If the DataObject contains string data, extract it
+            if (e.Data != null)
+            {
+                //If the label content of the listbox item is 'All Music' disable drop
+                Label listItemText = (Label)sender;
+
+                if (listItemText.Content.ToString() != "All Music")
+                {
+                    e.Effects = DragDropEffects.Copy;
                 }
             }
         }

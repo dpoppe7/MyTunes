@@ -28,11 +28,11 @@
                 </Button>
             </ToolBar>
 
-            <ListBox DockPanel.Dock="Left" x:Name="playlistListBox" Width="150" Margin="10" MouseRightButtonUp="playlistListBox_MouseRightButtonUp">
+            <ListBox DockPanel.Dock="Left" x:Name="playlistListBox" Width="150" Margin="10">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="{Binding}" AllowDrop="True"/>
+                            <Label x:Name="listLabel" Content="{Binding}" AllowDrop="True" DragOver="playlist_DragOver" Drop="playlist_Drop"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
