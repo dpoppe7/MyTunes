@@ -18,12 +18,15 @@ namespace myTunes
     {
         private List<string> playlistNames = new();
         private List<Song> songList = new();
+        private readonly MediaPlayer mediaPlayer;
         private Point startPoint;
 
         private readonly MusicRepo musicRepo;
         public MainWindow()
         {
             InitializeComponent();
+
+            mediaPlayer = new MediaPlayer();
 
             try
             {
@@ -226,5 +229,30 @@ namespace myTunes
                 }
             }
         }
+
+        private void musicDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DataRowView rowView = musicDataGrid.SelectedItem as DataRowView;
+
+            if (rowView != null)
+            {
+                // Extract the song ID from the selected song
+                int songId = Convert.ToInt32(rowView.Row.ItemArray[0]);
+                Song s = musicRepo.GetSong(songId);
+                mediaPlayer.Open(new Uri(s.Filename));
+            }
+        }
+
+        private void playButton_Click(object sender, RoutedEventArgs e)
+        {
+            mediaPlayer.Play();
+        }
+
+        private void stopButton_Click(object sender, RoutedEventArgs e)
+        {
+            mediaPlayer.Stop();
+        }
+
+
     }
 }

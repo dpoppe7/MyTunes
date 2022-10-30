@@ -48,9 +48,14 @@
             <DockPanel Width="auto" Height="auto">
                 <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Height="40">
                     <!--Add buttons -->
+                    <Button x:Name="playButton" Content="Play" Margin="10,0,5,0" Height="25" Width="75" Click="playButton_Click"/>
+                    <Button x:Name="stopButton" Content="Stop" Height="25" Width="75" Click="stopButton_Click"/>
                 </StackPanel>
 
-                <DataGrid x:Name="musicDataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" DockPanel.Dock="Top" CanUserAddRows="False" Margin="10" ColumnWidth="*" PreviewMouseLeftButtonDown="musicDataGrid_PreviewMouseLeftButtonDown" MouseMove="musicDataGrid_MouseMove">
+                <DataGrid x:Name="musicDataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" 
+                          DockPanel.Dock="Top" Margin="10" ColumnWidth="*" PreviewMouseLeftButtonDown="musicDataGrid_PreviewMouseLeftButtonDown" 
+                          MouseMove="musicDataGrid_MouseMove" SelectionChanged="musicDataGrid_SelectionChanged"
+                          CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding id}" Visibility="Hidden"/>
                         <DataGridTextColumn Binding="{Binding title}" Header="Title"/>
