@@ -76,10 +76,11 @@ namespace myTunes
 
         private void playlistSelected_ItemActivate(object sender, EventArgs e)
         {
+            string? selectedPlaylist = playlistListBox.SelectedItems[0] as string;
+
             //When list item is clicked once, display songs inside that playlist
             if (playlistListBox.SelectedItems.Count > 0)
             {
-                string? selectedPlaylist = playlistListBox.SelectedItems[0] as string;
                 if (selectedPlaylist != null)
                 {
                     if (selectedPlaylist.ToString() != "All Music")
@@ -93,6 +94,13 @@ namespace myTunes
                         displayPlaylistSongs(songsTable, true);
                     }
                 }
+            }
+
+            //Updates Context menu item 'Remove' for Datagrid
+            if (selectedPlaylist != null)
+            {
+                if (selectedPlaylist.ToString() == "All Music") RemoveMenuItem.Header = "Remove";
+                else RemoveMenuItem.Header = "Remove from Playlist";
             }
         }
 
