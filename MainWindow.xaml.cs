@@ -245,7 +245,7 @@ namespace myTunes
             }
         }
 
-        private void musicDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void playButton_Click(object sender, RoutedEventArgs e)
         {
             DataRowView? rowView = musicDataGrid.SelectedItem as DataRowView;
 
@@ -255,12 +255,8 @@ namespace myTunes
                 int songId = Convert.ToInt32(rowView.Row.ItemArray[0]);
                 Song s = musicRepo.GetSong(songId);
                 mediaPlayer.Open(new Uri(s.Filename));
+                mediaPlayer.Play();
             }
-        }
-
-        private void playButton_Click(object sender, RoutedEventArgs e)
-        {
-            mediaPlayer.Play();
         }
 
         private void stopButton_Click(object sender, RoutedEventArgs e)

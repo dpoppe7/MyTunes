@@ -55,7 +55,7 @@
                 <DataGrid x:Name="musicDataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" 
                           DockPanel.Dock="Top" Margin="10" ColumnWidth="*" 
                           PreviewMouseLeftButtonDown="musicDataGrid_PreviewMouseLeftButtonDown" 
-                          MouseMove="musicDataGrid_MouseMove" SelectionChanged="musicDataGrid_SelectionChanged"
+                          MouseMove="musicDataGrid_MouseMove"
                           CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding id}" Visibility="Hidden"/>
