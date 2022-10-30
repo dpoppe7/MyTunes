@@ -20,6 +20,7 @@ namespace myTunes
         private List<Song> songList = new();
         private readonly MediaPlayer mediaPlayer;
         private Point startPoint;
+        private bool isPlaylistSelected = false;
 
         private readonly MusicRepo musicRepo;
         public MainWindow()
@@ -97,10 +98,20 @@ namespace myTunes
             }
 
             //Updates Context menu item 'Remove' for Datagrid
-            if (selectedPlaylist != null)
+            if (selectedPlaylist != null) UpdateContextMenuItems(selectedPlaylist);
+        }
+
+        private void UpdateContextMenuItems(string selectedItem)
+        {
+            if (selectedItem.ToString() == "All Music")
             {
-                if (selectedPlaylist.ToString() == "All Music") RemoveMenuItem.Header = "Remove";
-                else RemoveMenuItem.Header = "Remove from Playlist";
+                RemoveMenuItem.Header = "Remove";
+                isPlaylistSelected = false;
+            }
+            else
+            {
+                RemoveMenuItem.Header = "Remove from Playlist";
+                isPlaylistSelected = true;
             }
         }
 
@@ -235,7 +246,7 @@ namespace myTunes
 
         private void musicDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DataRowView rowView = musicDataGrid.SelectedItem as DataRowView;
+            DataRowView? rowView = musicDataGrid.SelectedItem as DataRowView;
 
             if (rowView != null)
             {
@@ -273,6 +284,32 @@ namespace myTunes
 
                 // Call the MusicRepo method Save() to save the DataSet to the music.xml file.
                 musicRepo.Save();
+            }
+        }
+
+        private void RemoveMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            DataRowView? rowView = musicDataGrid.SelectedItem as DataRowView;
+            if (rowView != null)
+            {
+                int songId = Convert.ToInt32(rowView.Row.ItemArray[0]);
+                Song song = musicRepo.GetSong(songId);
+
+                //isPlaylistSelected is false when 'All Music' is selected
+                if (!isPlaylistSelected)
+                {
+                    //Display Confirmation Message Box when trying to remove a song from 'All Music'
+                    if (MessageBox.Show("Are you sure you want to remove this song from Library?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        musicRepo.DeleteSong(song.Id);
+                    }
+                }
+                else
+                {
+                    //No Confirmation Box needed when trying to remove a song from any playlist
+                    rowView.Delete();
+                    musicRepo.Save();
+                }
             }
         }
     }

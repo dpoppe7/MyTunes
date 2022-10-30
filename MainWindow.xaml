@@ -68,7 +68,7 @@
                         <ContextMenu>
                             <MenuItem Header="Play"/>
                             <Separator/>
-                            <MenuItem x:Name="RemoveMenuItem" Header="Remove"/>
+                            <MenuItem x:Name="RemoveMenuItem" Header="Remove" Click="RemoveMenuItem_Click"/>
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                 </DataGrid>
