@@ -122,6 +122,7 @@ namespace myTunes
                 MenuItem_RemovePlaylist.IsEnabled = true;
                 MenuItem_RenamePlaylist.IsEnabled = true;
             }
+            isPlayEnabled = false;
         }
 
         private void displayPlaylistSongs(DataView dataView, bool isDefaultView)
