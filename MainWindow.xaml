@@ -30,8 +30,8 @@
     </Window.Resources>
 
     <Window.CommandBindings>
-        <CommandBinding Command="Play" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
-        <CommandBinding Command="Stop" Executed="CommandBinding_Executed_1" CanExecute="CommandBinding_CanExecute_1"/>
+        <CommandBinding Command="Play" Executed="PlayCommandBinding_Executed" CanExecute="PlayCommandBinding_CanExecute"/>
+        <CommandBinding Command="Stop" Executed="StopCommandBinding_Executed" CanExecute="StopCommandBinding_CanExecute"/>
     </Window.CommandBindings>
 
 

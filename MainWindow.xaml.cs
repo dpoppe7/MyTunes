@@ -283,11 +283,6 @@ namespace myTunes
             }
         }
 
-        private void stopButton_Click(object sender, RoutedEventArgs e)
-        {
-            mediaPlayer.Stop();
-        }
-
         private void RemoveMenuItem_Click(object sender, RoutedEventArgs e)
         {
             DataRowView? rowView = musicDataGrid.SelectedItem as DataRowView;
@@ -315,12 +310,12 @@ namespace myTunes
             }
         }
 
-        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void PlayCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = isPlayEnabled;
         }
 
-        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void PlayCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             DataRowView? rowView = musicDataGrid.SelectedItem as DataRowView;
 
@@ -335,13 +330,13 @@ namespace myTunes
             }
         }
 
-        private void CommandBinding_Executed_1(object sender, ExecutedRoutedEventArgs e)
+        private void StopCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             mediaPlayer.Stop();
             isStopEnabled = false;
         }
 
-        private void CommandBinding_CanExecute_1(object sender, CanExecuteRoutedEventArgs e)
+        private void StopCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = isStopEnabled;
         }
