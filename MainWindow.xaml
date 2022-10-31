@@ -53,7 +53,7 @@
                 </Button>
             </ToolBar>
 
-            <ListBox DockPanel.Dock="Left" x:Name="playlistListBox" Width="150" Margin="10">
+            <ListBox DockPanel.Dock="Left" x:Name="playlistListBox" Width="150" Margin="10" KeyDown="playlistListBox_KeyDown">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">

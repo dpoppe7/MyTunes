@@ -404,5 +404,23 @@ namespace myTunes
                 }
             }
         }
+
+        //source: https://shrinandvyas.blogspot.com/2011/07/wpf-c-detect-ctrl-previewkeydown.html
+        private void playlistListBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            string? selectedPlaylist = playlistListBox.SelectedItems[0] as string;
+
+            if (selectedPlaylist.ToString() != "All Music")
+            {
+                if (e.Key == Key.R && Keyboard.Modifiers == ModifierKeys.Control)
+                {
+                    MenuItem_RenamePlaylist_Click(sender, e);
+                }
+                else if (e.Key == Key.Delete)
+                {
+                    MenuItem_DeletePlaylist_Click(sender, e);
+                }
+            }
+        }
     }
 }
