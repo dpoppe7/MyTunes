@@ -209,6 +209,10 @@ namespace myTunes
                 //TEMPORAL
                 mediaPlayer.Open(new Uri(openFileDialog.FileName));
                 mediaPlayer.Play();
+                isPlayEnabled = true;
+                isStopEnabled = true;
+
+                musicDataGrid.SelectedIndex = musicDataGrid.Items.Count - 1;
             }
         }
 
@@ -279,20 +283,6 @@ namespace myTunes
             }
         }
 
-        //private void playButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    DataRowView? rowView = musicDataGrid.SelectedItem as DataRowView;
-
-        //    if (rowView != null)
-        //    {
-        //        // Extract the song ID from the selected song
-        //        int songId = Convert.ToInt32(rowView.Row.ItemArray[0]);
-        //        Song s = musicRepo.GetSong(songId);
-        //        mediaPlayer.Open(new Uri(s.Filename));
-        //        mediaPlayer.Play();
-        //    }
-        //}
-
         private void stopButton_Click(object sender, RoutedEventArgs e)
         {
             mediaPlayer.Stop();
@@ -321,6 +311,7 @@ namespace myTunes
                     rowView.Delete();
                 }
                 musicRepo.Save();
+                isPlayEnabled = false;
             }
         }
 
