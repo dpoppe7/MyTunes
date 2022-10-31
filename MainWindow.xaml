@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:myTunes"
         mc:Ignorable="d"
         Title="myTunes" Height="414" Width="749" WindowStartupLocation="CenterScreen" Icon="/song_bird_21844.png">
+    
     <Window.Resources>
         <ControlTemplate x:Key="MyButtonTemplate" TargetType="Button">
             <Border Name="Border" BorderThickness="2" CornerRadius="10" BorderBrush="Black">
@@ -20,9 +21,19 @@
                 <Trigger Property="IsPressed" Value="True">
                     <Setter TargetName="Border" Property="Background" Value="SkyBlue" />
                 </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5" />
+                    <Setter TargetName="Border" Property="Background" Value="gray" />
+                </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
     </Window.Resources>
+
+    <Window.CommandBindings>
+        <CommandBinding Command="Play" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding Command="Stop" Executed="CommandBinding_Executed_1" CanExecute="CommandBinding_CanExecute_1"/>
+    </Window.CommandBindings>
+
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -62,15 +73,15 @@
             <DockPanel Width="auto" Height="auto">
                 <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Height="40">
                     <!--Add buttons -->
-                    <Button x:Name="playButton" Content="Play" Margin="10,0,5,0" Height="25" Width="75" Click="playButton_Click" Template="{StaticResource MyButtonTemplate}"/>
-                    <Button x:Name="stopButton" Content="Stop" Height="25" Width="75" Click="stopButton_Click" Template="{StaticResource MyButtonTemplate}"/>
+                    <Button x:Name="playButton" Content="Play" Command="Play" Margin="10,0,5,0" Height="25" Width="75" Template="{StaticResource MyButtonTemplate}"/>
+                    <Button x:Name="stopButton" Content="Stop" Command="Stop" Height="25" Width="75" Template="{StaticResource MyButtonTemplate}"/>
                 </StackPanel>
 
                 <DataGrid x:Name="musicDataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" 
                           DockPanel.Dock="Top" Margin="10" ColumnWidth="*" 
                           PreviewMouseLeftButtonDown="musicDataGrid_PreviewMouseLeftButtonDown" 
                           MouseMove="musicDataGrid_MouseMove"
-                          CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single">
+                          CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" SelectionChanged="musicDataGrid_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding id}" Visibility="Hidden"/>
                         <DataGridTextColumn Binding="{Binding title}" Header="Title"/>
@@ -80,7 +91,7 @@
                     </DataGrid.Columns>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
-                            <MenuItem x:Name="PlayMenuItem" Header="Play" Click="PlayMenuItem_Click"/>
+                            <MenuItem x:Name="PlayMenuItem" Header="Play" Command="Play"/>
                             <Separator/>
                             <MenuItem x:Name="RemoveMenuItem" Header="Remove" Click="RemoveMenuItem_Click"/>
                         </ContextMenu>
