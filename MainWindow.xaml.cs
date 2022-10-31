@@ -21,6 +21,9 @@ namespace myTunes
         private readonly MediaPlayer mediaPlayer;
         private Point startPoint;
         private bool isPlaylistSelected = false;
+        private bool isPlayEnabled = false;
+        private bool isStopEnabled = false;
+
 
         private readonly MusicRepo musicRepo;
         public MainWindow()
@@ -269,19 +272,19 @@ namespace myTunes
             }
         }
 
-        private void playButton_Click(object sender, RoutedEventArgs e)
-        {
-            DataRowView? rowView = musicDataGrid.SelectedItem as DataRowView;
+        //private void playButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    DataRowView? rowView = musicDataGrid.SelectedItem as DataRowView;
 
-            if (rowView != null)
-            {
-                // Extract the song ID from the selected song
-                int songId = Convert.ToInt32(rowView.Row.ItemArray[0]);
-                Song s = musicRepo.GetSong(songId);
-                mediaPlayer.Open(new Uri(s.Filename));
-                mediaPlayer.Play();
-            }
-        }
+        //    if (rowView != null)
+        //    {
+        //        // Extract the song ID from the selected song
+        //        int songId = Convert.ToInt32(rowView.Row.ItemArray[0]);
+        //        Song s = musicRepo.GetSong(songId);
+        //        mediaPlayer.Open(new Uri(s.Filename));
+        //        mediaPlayer.Play();
+        //    }
+        //}
 
         private void stopButton_Click(object sender, RoutedEventArgs e)
         {
@@ -314,9 +317,40 @@ namespace myTunes
             }
         }
 
-        private void PlayMenuItem_Click(object sender, RoutedEventArgs e)
+        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            playButton_Click(sender, e);
+            e.CanExecute = isPlayEnabled;
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            DataRowView? rowView = musicDataGrid.SelectedItem as DataRowView;
+
+            if (rowView != null)
+            {
+                // Extract the song ID from the selected song
+                int songId = Convert.ToInt32(rowView.Row.ItemArray[0]);
+                Song s = musicRepo.GetSong(songId);
+                mediaPlayer.Open(new Uri(s.Filename));
+                mediaPlayer.Play();
+                isStopEnabled = true;
+            }
+        }
+
+        private void CommandBinding_Executed_1(object sender, ExecutedRoutedEventArgs e)
+        {
+            mediaPlayer.Stop();
+            isStopEnabled = false;
+        }
+
+        private void CommandBinding_CanExecute_1(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = isStopEnabled;
+        }
+
+        private void musicDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            isPlayEnabled = true;
         }
     }
 }
