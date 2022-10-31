@@ -40,7 +40,8 @@ namespace myTunes
             }
 
             PopulatePlaylists_Listbox();
-            PopulateSongs_Datagrid();        }
+            PopulateSongs_Datagrid();        
+        }
 
         private void PopulateSongs_Datagrid()
         {
@@ -62,6 +63,7 @@ namespace myTunes
         {
             //Binding List of elements in Playlist[] to playlistListNames
             playlistNames.Add("All Music");
+
             foreach (var name in musicRepo.Playlists)
             {
                 playlistNames.Add(name);
@@ -107,11 +109,15 @@ namespace myTunes
             {
                 RemoveMenuItem.Header = "Remove";
                 isPlaylistSelected = false;
+                MenuItem_RemovePlaylist.IsEnabled = false;
+                MenuItem_RenamePlaylist.IsEnabled = false;
             }
             else
             {
                 RemoveMenuItem.Header = "Remove from Playlist";
                 isPlaylistSelected = true;
+                MenuItem_RemovePlaylist.IsEnabled = true;
+                MenuItem_RenamePlaylist.IsEnabled = true;
             }
         }
 
@@ -163,8 +169,8 @@ namespace myTunes
                     if (musicRepo.AddPlaylist(newPlaylist.newPlaylistName_Textbox.Text))
                     {
                         playlistNames.Add(newPlaylist.newPlaylistName_Textbox.Text);
-
-                        playlistListBox.Items.Refresh();
+                        playlistListBox.Items.Refresh();    //https://learn.microsoft.com/en-us/answers/questions/343765/how-to-refresh-a-listbox.html
+                        musicRepo.Save();
                     }
                     else
                     {
@@ -242,8 +248,8 @@ namespace myTunes
             {
                 // Extract the song ID from the selected song
                 int songId = Convert.ToInt32(rowView.Row.ItemArray[0]);
-
                 Song song = musicRepo.GetSong(songId);
+
                 if (playlist != null)
                 {
                     musicRepo.AddSongToPlaylist(song.Id, playlist);
@@ -300,7 +306,7 @@ namespace myTunes
                 if (!isPlaylistSelected)
                 {
                     //Display Confirmation Message Box when trying to remove a song from 'All Music'
-                    if (MessageBox.Show("Are you sure you want to remove this song from Library?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    if (MessageBox.Show($"Are you sure you want to remove song: \"{song.Title}\" from Library?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
                         musicRepo.DeleteSong(song.Id);
                     }
@@ -317,6 +323,27 @@ namespace myTunes
         private void PlayMenuItem_Click(object sender, RoutedEventArgs e)
         {
             playButton_Click(sender, e);
+        }
+
+        private void MenuItem_DeletePlaylist_Click(object sender, RoutedEventArgs e)
+        {
+            string? selectedPlaylist = playlistListBox.SelectedItems[0] as string;
+
+            if (selectedPlaylist != null)
+            {
+                //Display Confirmation Message Box when trying to remove a song from 'All Music'
+                //String.Format source: https://stackoverflow.com/questions/13033581/insert-variable-values-in-the-middle-of-a-string
+                if (MessageBox.Show($"Are you sure you want to delete \"{selectedPlaylist}\" playlist?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    if (musicRepo.DeletePlaylist(selectedPlaylist))
+                    {
+                        playlistNames.Remove(selectedPlaylist);
+                        playlistListBox.SelectedIndex = 0;
+                        playlistListBox.Items.Refresh();
+                        musicRepo.Save();
+                    }
+                }
+            }
         }
     }
 }

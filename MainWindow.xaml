@@ -51,10 +51,10 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
                 <ListBox.ContextMenu>
-                    <ContextMenu DataContext="{Binding Path=PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
-                        <MenuItem Header="Rename"/>
+                    <ContextMenu>
+                        <MenuItem x:Name="MenuItem_RenamePlaylist" IsEnabled="False" Header="Rename" InputGestureText="Ctrl+R"/>
                         <Separator/>
-                        <MenuItem Header="Remove"/>
+                        <MenuItem x:Name="MenuItem_RemovePlaylist" IsEnabled="False" Header="Delete" InputGestureText="Del" Click="MenuItem_DeletePlaylist_Click"/>
                     </ContextMenu>
                 </ListBox.ContextMenu>
             </ListBox>
