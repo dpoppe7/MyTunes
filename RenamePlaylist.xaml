@@ -1,0 +1,15 @@
+﻿<Window x:Class="MyTunes.RenamePlaylist"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyTunes"
+        mc:Ignorable="d"
+        Title="Rename Playlist" Height="152" Width="271" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label x:Name="NewName_Label" Content="New Name:" HorizontalAlignment="Left" Margin="19,0,0,65" VerticalAlignment="Bottom" RenderTransformOrigin="0.462,1.333"/>
+        <TextBox x:Name="playlistNewName_Textbox" HorizontalAlignment="Left" Margin="108,0,0,68" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="134" Height="19"/>
+        <Button x:Name="OkButton_RenamePlaylist" Content="OK" HorizontalAlignment="Left" Margin="54,0,0,16" VerticalAlignment="Bottom" Width="66" Click="OkButton_RenamePlaylist_Click"/>
+        <Button x:Name="CancelButton_RenamePlaylist" Content="Cancel" HorizontalAlignment="Left" Margin="142,0,0,16" VerticalAlignment="Bottom" Width="66" Click="CancelButton_RenamePlaylist_Click"/>
+    </Grid>
+</Window>

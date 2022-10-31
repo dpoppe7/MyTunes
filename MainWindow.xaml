@@ -52,7 +52,7 @@
                 </ListBox.ItemTemplate>
                 <ListBox.ContextMenu>
                     <ContextMenu>
-                        <MenuItem x:Name="MenuItem_RenamePlaylist" IsEnabled="False" Header="Rename" InputGestureText="Ctrl+R"/>
+                        <MenuItem x:Name="MenuItem_RenamePlaylist" IsEnabled="False" Header="Rename" InputGestureText="Ctrl+R" Click="MenuItem_RenamePlaylist_Click"/>
                         <Separator/>
                         <MenuItem x:Name="MenuItem_RemovePlaylist" IsEnabled="False" Header="Delete" InputGestureText="Del" Click="MenuItem_DeletePlaylist_Click"/>
                     </ContextMenu>

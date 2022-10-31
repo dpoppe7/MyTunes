@@ -174,7 +174,7 @@ namespace myTunes
                     }
                     else
                     {
-                        MessageBox.Show("There is already a playlist with that name.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("There is already a playlist with that name. Please enter a new playlist name.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 else
@@ -342,6 +342,39 @@ namespace myTunes
                         playlistListBox.Items.Refresh();
                         musicRepo.Save();
                     }
+                }
+            }
+        }
+
+        private void MenuItem_RenamePlaylist_Click(object sender, RoutedEventArgs e)
+        {
+            string? selectedPlaylist = playlistListBox.SelectedItems[0] as string;
+            RenamePlaylist renamePlaylist = new RenamePlaylist();
+            bool? result = renamePlaylist.ShowDialog();
+
+            if (result == true)
+            {
+                //Checks that input entered onto textbox is not empty/null.
+                if (!String.IsNullOrEmpty(renamePlaylist.playlistNewName_Textbox.Text) && selectedPlaylist!= null)
+                {
+                    //Tries adding the playlist name; returns true if successful, false if not added (playllist already existed)
+                    if (musicRepo.RenamePlaylist(selectedPlaylist, renamePlaylist.playlistNewName_Textbox.Text))
+                    {
+                        //replace list item; source: https://stackoverflow.com/questions/17188966/how-to-replace-list-item-in-best-way
+                        int index = playlistNames.FindIndex(s => s == selectedPlaylist);
+                        if (index != -1) playlistNames[index] = renamePlaylist.playlistNewName_Textbox.Text;
+                        playlistListBox.SelectedIndex = index;
+                        playlistListBox.Items.Refresh();
+                        musicRepo.Save();
+                    }
+                    else
+                    {
+                        MessageBox.Show("There is already a playlist with that name. Please enter a new name.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a new playlist name", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
