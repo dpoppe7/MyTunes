@@ -78,6 +78,9 @@ namespace myTunes
 
             //attaching an Event Handler on SelectionChanged
             playlistListBox.SelectionChanged += playlistSelected_ItemActivate;
+
+            // Make "All Music" playlisth editable
+            musicDataGrid.IsReadOnly = false;
         }
 
         private void playlistSelected_ItemActivate(object sender, EventArgs e)
@@ -91,11 +94,15 @@ namespace myTunes
                 {
                     if (selectedPlaylist.ToString() != "All Music")
                     {
+                        // Make "All Music" playlisth editable
+                        musicDataGrid.IsReadOnly = true;
                         DataView songsTable = musicRepo.SongsForPlaylist(selectedPlaylist.ToString()).DefaultView;
                         displayPlaylistSongs(songsTable, false);
                     }
                     else
                     {
+                        // Make other playlists not editable
+                        musicDataGrid.IsReadOnly = false;
                         DataView songsTable = musicRepo.Songs.DefaultView;
                         displayPlaylistSongs(songsTable, true);
                     }

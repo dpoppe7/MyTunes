@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyTunes"
         mc:Ignorable="d"
-        Title="New Playlist" Height="152" Width="271" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="New Playlist" Height="152" Width="271" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/song_bird_21844.png">
     <Grid>
         <Label x:Name="NewPlaylist_Label" Content="Playlist Name:" HorizontalAlignment="Left" Margin="19,0,0,65" VerticalAlignment="Bottom" RenderTransformOrigin="0.462,1.333"/>
         <TextBox x:Name="newPlaylistName_Textbox" HorizontalAlignment="Left" Margin="108,0,0,68" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="134" Height="19"/>
-        <Button x:Name="OkButton_NewPlaylist" Content="OK" HorizontalAlignment="Left" Margin="54,0,0,16" VerticalAlignment="Bottom" Width="66" Click="OkButton_NewPlaylist_Click"/>
+        <Button x:Name="OkButton_NewPlaylist" Content="OK" HorizontalAlignment="Left" Margin="54,0,0,16" VerticalAlignment="Bottom" Width="66" Click="OkButton_NewPlaylist_Click" IsDefault="True"/>
         <Button x:Name="CancelButton_NewPlaylist" Content="Cancel" HorizontalAlignment="Left" Margin="142,0,0,16" VerticalAlignment="Bottom" Width="66" Click="CancelButton_NewPlaylist_Click"/>
     </Grid>
 </Window>
