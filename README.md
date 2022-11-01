@@ -1,7 +1,15 @@
 # MyTunes
 
-WPF application that allows a user to organize and play songs.  Audio files can be added to and removed 
-from the app and organized into playlists.
+WPF application that allows a user to organize and play songs.  Audio files can be added to and removed from the app and organized into playlists.
+
+# Procrastination Penalty
+
+Both requirements completed on time.
+
+# Additional requirements implemented 
+
+1. Add the ability to rename and delete a playlist. 
+2. Use a control template or styles with at least one trigger to alter the look and behavior of the Play and Stop buttons. 
 
 # Contributions of each teammate:
 
