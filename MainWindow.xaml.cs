@@ -206,11 +206,16 @@ namespace myTunes
                 // Call the MusicRepo method Save() to save the DataSet to the music.xml file.
                 musicRepo.Save();
 
-                //TEMPORAL
+                // Play song immediately after it is added
                 mediaPlayer.Open(new Uri(openFileDialog.FileName));
                 mediaPlayer.Play();
                 isPlayEnabled = true;
                 isStopEnabled = true;
+
+                // Go back to "All Music" and highligth last row.
+                DataView songsTable = musicRepo.Songs.DefaultView;
+                displayPlaylistSongs(songsTable, true);
+                playlistListBox.SelectedIndex = 0;
 
                 musicDataGrid.SelectedIndex = musicDataGrid.Items.Count - 1;
             }
@@ -405,15 +410,18 @@ namespace myTunes
         {
             string? selectedPlaylist = playlistListBox.SelectedItems[0] as string;
 
-            if (selectedPlaylist.ToString() != "All Music")
+            if(selectedPlaylist != null)
             {
-                if (e.Key == Key.R && Keyboard.Modifiers == ModifierKeys.Control)
+                if (selectedPlaylist.ToString() != "All Music")
                 {
-                    MenuItem_RenamePlaylist_Click(sender, e);
-                }
-                else if (e.Key == Key.Delete)
-                {
-                    MenuItem_DeletePlaylist_Click(sender, e);
+                    if (e.Key == Key.R && Keyboard.Modifiers == ModifierKeys.Control)
+                    {
+                        MenuItem_RenamePlaylist_Click(sender, e);
+                    }
+                    else if (e.Key == Key.Delete)
+                    {
+                        MenuItem_DeletePlaylist_Click(sender, e);
+                    }
                 }
             }
         }
