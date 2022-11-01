@@ -174,7 +174,6 @@ namespace myTunes
                     {
                         playlistNames.Add(newPlaylist.newPlaylistName_Textbox.Text);
                         playlistListBox.Items.Refresh();    //https://learn.microsoft.com/en-us/answers/questions/343765/how-to-refresh-a-listbox.html
-                        musicRepo.Save();
                     }
                     else
                     {
@@ -202,9 +201,6 @@ namespace myTunes
             {
                 // Call the MusicRepo method AddSong() to add the song to the DataSet.
                 musicRepo.AddSong(openFileDialog.FileName);
-
-                // Call the MusicRepo method Save() to save the DataSet to the music.xml file.
-                musicRepo.Save();
 
                 // Play song immediately after it is added
                 mediaPlayer.Open(new Uri(openFileDialog.FileName));
@@ -266,7 +262,6 @@ namespace myTunes
                 if (playlist != null)
                 {
                     musicRepo.AddSongToPlaylist(song.Id, playlist);
-                    musicRepo.Save();
                 }
             }
         }
@@ -310,7 +305,6 @@ namespace myTunes
                     //No Confirmation Box needed when trying to remove a song from any playlist
                     rowView.Delete();
                 }
-                musicRepo.Save();
                 isPlayEnabled = false;
             }
         }
@@ -366,7 +360,6 @@ namespace myTunes
                         playlistNames.Remove(selectedPlaylist);
                         playlistListBox.SelectedIndex = 0;
                         playlistListBox.Items.Refresh();
-                        musicRepo.Save();
                     }
                 }
             }
@@ -391,7 +384,6 @@ namespace myTunes
                         if (index != -1) playlistNames[index] = renamePlaylist.playlistNewName_Textbox.Text;
                         playlistListBox.SelectedIndex = index;
                         playlistListBox.Items.Refresh();
-                        musicRepo.Save();
                     }
                     else
                     {
@@ -424,6 +416,11 @@ namespace myTunes
                     }
                 }
             }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            musicRepo.Save();
         }
     }
 }
